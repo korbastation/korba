@@ -924,6 +924,7 @@
                             <a href="#" class="btn-outline px-4 py-2 text-xs">YouTube</a>
                             <a href="#" class="btn-outline px-4 py-2 text-xs">Spotify</a>
                             <a href="#" class="btn-outline px-4 py-2 text-xs">VK</a>
+                            <a href="#" class="btn-outline px-4 py-2 text-xs">TikTok</a>
                         </div>
                     </div>
                 </div>
@@ -1082,8 +1083,8 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     animateValue('concertsCount', 0, 1, 2000);
-                    animateValue('tracksCount', 0, 10, 2000);
-                    animateValue('fansCount', 0, 5, 2000);
+                    animateValue('tracksCount', 0, 12, 2000);
+                    animateValue('fansCount', 0, 8, 2000);
                     statsObserver.unobserve(entry.target);
                 }
             });
@@ -1132,7 +1133,8 @@
             generateTracks();
             
             const aboutSection = document.getElementById('about');
-            if (aboutSection) {
+            if (aboutSection) 
+            {
                 statsObserver.observe(aboutSection);
             }
 
