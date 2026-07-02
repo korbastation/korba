@@ -221,6 +221,26 @@
             color: hsl(240 5% 64.9%);
         }
 
+        /* Select styles */
+        .select {
+            display: flex;
+            width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid hsl(240 3.7% 15.9%);
+            background: hsl(240 10% 3.9%);
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+            color: hsl(0 0% 98%);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .select:focus {
+            outline: none;
+            border-color: hsl(240 5% 26%);
+            background: hsl(240 5% 6%);
+        }
+
         /* Textarea styles */
         .textarea {
             display: flex;
@@ -417,6 +437,30 @@
             pointer-events: all;
         }
 
+        /* Service card styles */
+        .service-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card.selected {
+            border-color: hsl(0 0% 98%);
+            background: hsl(240 5% 6%);
+        }
+
+        .service-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background: hsl(240 3.7% 15.9%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .desktop-nav {
@@ -453,6 +497,7 @@
                     <a href="#about" class="nav-link">О нас</a>
                     <a href="#members" class="nav-link">Участники</a>
                     <a href="#music" class="nav-link">Музыка</a>
+                    <a href="#services" class="nav-link">Услуги</a>
                     <a href="#tour" class="nav-link">Туры</a>
                     <a href="#gallery" class="nav-link">Галерея</a>
                     <a href="#contact" class="nav-link">Контакты</a>
@@ -486,6 +531,7 @@
             <a href="#about" class="nav-link text-base" onclick="toggleMobileMenu()">О нас</a>
             <a href="#members" class="nav-link text-base" onclick="toggleMobileMenu()">Участники</a>
             <a href="#music" class="nav-link text-base" onclick="toggleMobileMenu()">Музыка</a>
+            <a href="#services" class="nav-link text-base" onclick="toggleMobileMenu()">Услуги</a>
             <a href="#tour" class="nav-link text-base" onclick="toggleMobileMenu()">Туры</a>
             <a href="#gallery" class="nav-link text-base" onclick="toggleMobileMenu()">Галерея</a>
             <a href="#contact" class="nav-link text-base" onclick="toggleMobileMenu()">Контакты</a>
@@ -525,7 +571,7 @@
                     Telegram 
                     </a>
                     <a href="https://tiktok.com/@koraviybas" class="btn btn-outline">
-                        TikTok
+                    TikTok
                     </a>
                 </div>
             </div>
@@ -694,8 +740,98 @@
         </div>
     </section>
 
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-zinc-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Студийная работа</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-4 tracking-tight">Наши услуги</h2>
+                <p class="text-zinc-400 mt-4 max-w-2xl mx-auto">
+                    Пишем, сводим и мастерим на своём оборудовании. Выберите услугу и оставьте заявку — мы свяжемся с вами, чтобы обсудить детали.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-16" id="servicesList">
+                <!-- Service 1 -->
+                <div class="card service-card" data-service="Сведение трека">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-2v13M9 19a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Сведение трека</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
+                        Сводим ваш трек по стемам: баланс, панорама, обработка, мастеринг под стриминг и винил.
+                    </p>
+                    <button type="button" class="btn btn-outline w-full order-btn" data-service="Сведение трека" onclick="selectService('Сведение трека')">
+                        Заказать сведение
+                    </button>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="card service-card" data-service="Минус">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H5m14 8H5m14 4H5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Минус</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
+                        Пишем авторский бит под ваш стиль и текст: от мрачного буг-бэпа до современного трэпа.
+                    </p>
+                    <button type="button" class="btn btn-outline w-full order-btn" data-service="Минус" onclick="selectService('Минус')">
+                        Заказать минус
+                    </button>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="card service-card" data-service="Панели">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 6a1 1 0 011-1h6a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8zm10 0a1 1 0 011-1h4a1 1 0 011 1v8a1 1 0 01-1 1h-4a1 1 0 01-1-1v-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Панели</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
+                        Изготавливаем и устанавливаем акустические панели для студийной и домашней обработки звука.
+                    </p>
+                    <button type="button" class="btn btn-outline w-full order-btn" data-service="Панели" onclick="selectService('Панели')">
+                        Заказать панели
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <div class="card max-w-2xl mx-auto" id="serviceFormCard">
+                <h3 class="text-xl font-bold mb-1">Оставить заявку</h3>
+                <p class="text-sm text-zinc-400 mb-6">Выберите услугу выше или в списке ниже, заполните форму — мы свяжемся с вами.</p>
+                <form class="space-y-4" onsubmit="return handleServiceSubmit(event)">
+                    <div>
+                        <label class="block text-xs text-zinc-500 uppercase tracking-wider mb-2">Услуга</label>
+                        <select class="select" id="serviceSelect" required>
+                            <option value="" disabled selected>Выберите услугу</option>
+                            <option value="Сведение трека">Заказать сведение трека</option>
+                            <option value="Минус">Заказать минус</option>
+                            <option value="Панели">Заказать панели</option>
+                        </select>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Ваше имя" class="input" id="serviceName" required />
+                        <input type="tel" placeholder="Телефон или Telegram" class="input" id="serviceContact" required />
+                    </div>
+                    <div>
+                        <textarea placeholder="Детали заказа: сроки, референсы, пожелания" class="textarea" id="serviceMessage" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Tour Section -->
-    <section id="tour" class="py-24 bg-zinc-950">
+    <section id="tour" class="py-24">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Live</span>
@@ -812,7 +948,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-24">
+    <section id="gallery" class="py-24 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Фото</span>
@@ -867,7 +1003,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-zinc-950">
+    <section id="contact" class="py-24">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Контакты</span>
@@ -1123,11 +1259,35 @@
             overlay.classList.toggle('active');
         }
 
-        // Form submission
+        // Form submission (общая форма контактов)
         function handleSubmit(e) {
             e.preventDefault();
             alert('Спасибо за сообщение! Мы свяжемся с вами в ближайшее время.');
             e.target.reset();
+            return false;
+        }
+
+        // Services: выбор услуги карточкой -> подставляем в select формы заявки
+        function selectService(serviceName) {
+            const select = document.getElementById('serviceSelect');
+            select.value = serviceName;
+
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.service === serviceName);
+            });
+
+            document.getElementById('serviceFormCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('serviceName').focus();
+        }
+
+        // Форма заявки на услугу
+        function handleServiceSubmit(e) {
+            e.preventDefault();
+            const service = document.getElementById('serviceSelect').value;
+            const name = document.getElementById('serviceName').value;
+            alert(`Спасибо, ${name}! Ваша заявка на услугу «${service}» принята. Мы свяжемся с вами в ближайшее время.`);
+            e.target.reset();
+            document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
             return false;
         }
 
