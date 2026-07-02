@@ -747,7 +747,7 @@
                 <span class="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Студийная работа</span>
                 <h2 class="text-4xl md:text-5xl font-black mt-4 tracking-tight">Наши услуги</h2>
                 <p class="text-zinc-400 mt-4 max-w-2xl mx-auto">
-                    Пишем, сводим и мастерим на своём оборудовании. Выберите услугу и оставьте заявку — мы свяжемся с вами, чтобы обсудить детали.
+                    Пишем, сводим и мастерим на своём оборудовании, а также изготавливаем акустические панели для студий и домашних помещений.
                 </p>
             </div>
 
@@ -775,12 +775,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H5m14 8H5m14 4H5"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Минус</h3>
+                    <h3 class="text-xl font-bold mb-2">Бит</h3>
                     <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
-                        Пишем авторский бит под ваш стиль и текст: от мрачного буг-бэпа до современного трэпа.
+                        Пишем авторский бит под ваш стиль и текст: от мрачного бумбэпа до современного трэпа.
                     </p>
                     <button type="button" class="btn btn-outline w-full order-btn" data-service="Минус" onclick="selectService('Минус')">
-                        Заказать минус
+                        Заказать бит
                     </button>
                 </div>
 
@@ -800,6 +800,36 @@
                     </button>
                 </div>
             </div>
+            <!--service 4-->
+            <div class="card service-card" data-service="Курс по битмейкингу">
+                <div class="service-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Курс по битмейкингу</h3>
+                <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
+                    Практические занятия по созданию битов.
+                </p>
+                <button type="button" class="btn btn-outline w-full order-btn" data-service="Курс по битмейкингу" onclick="selectService('Курс по битмейкингу')">
+                    Заказать курс
+                </button>
+            </div>
+            <!--service 5-->
+            <div class="card service-card" data-service="Курс по сведению треков">
+                <div class="service-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Курс по сведению треков</h3>
+                <p class="text-sm text-zinc-400 leading-relaxed mb-6 flex-1">
+                    Практические занятия по сведению треков и работе с оборудованием.
+                </p>
+                <button type="button" class="btn btn-outline w-full order-btn" data-service="Курс по сведению треков" onclick="selectService('Курс по сведению треков')">
+                    Заказать курс
+                </button>
+            </div>
 
             <!-- Order Form -->
             <div class="card max-w-2xl mx-auto" id="serviceFormCard">
@@ -811,8 +841,10 @@
                         <select class="select" id="serviceSelect" required>
                             <option value="" disabled selected>Выберите услугу</option>
                             <option value="Сведение трека">Заказать сведение трека</option>
-                            <option value="Минус">Заказать минус</option>
+                            <option value="Минус">Заказать бит</option>
                             <option value="Панели">Заказать панели</option>
+                            <option value="Курс по битмейкингу">Заказать курс по битмейкингу</option>
+                            <option value="Курс по сведению треков">Заказать курс по сведению треков</option>
                         </select>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
