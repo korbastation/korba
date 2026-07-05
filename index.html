@@ -830,29 +830,32 @@
             <div class="card max-w-2xl mx-auto" id="serviceFormCard">
                 <h3 class="text-xl font-bold mb-1">Оставить заявку</h3>
                 <p class="text-sm text-zinc-400 mb-6">Выберите услугу выше или в списке ниже, заполните форму — мы свяжемся с вами.</p>
-                <form class="space-y-4" onsubmit="return handleServiceSubmit(event)">
-                    <div>
-                        <label class="block text-xs text-zinc-500 uppercase tracking-wider mb-2">Услуга</label>
-                        <select class="select" id="serviceSelect" required>
-                            <option value="" disabled selected>Выберите услугу</option>
-                            <option value="Сведение трека">Заказать сведение трека</option>
-                            <option value="Минус">Заказать бит</option>
-                            <option value="Панели">Заказать панели</option>
-                            <option value="Курс по битмейкингу">Заказать курс по битмейкингу</option>
-                            <option value="Курс по сведению треков">Заказать курс по сведению треков</option>
-                        </select>
-                    </div>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Ваше имя" class="input" id="serviceName" required />
-                        <input type="tel" placeholder="Телефон или Telegram" class="input" id="serviceContact" required />
-                    </div>
-                    <div>
-                        <textarea placeholder="Детали заказа: сроки, референсы, пожелания" class="textarea" id="serviceMessage" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-full">
-                        Отправить заявку
-                    </button>
-                </form>
+                    <form class="space-y-4" onsubmit="return handleServiceSubmit(event)">
+                        <input type="hidden" name="access_key" value="2d503da5-60d8-4439-bc19-f049bb43bc42">
+                        <input type="hidden" name="subject" value="Новая заявка с сайта Корявый Бас">
+                        <input type="hidden" name="from_name" value="Корявый Бас — Заявки с сайта">
+                        <div>
+                            <label class="block text-xs text-zinc-500 uppercase tracking-wider mb-2">Услуга</label>
+                            <select class="select" id="serviceSelect" name="service" required>
+                                <option value="" disabled selected>Выберите услугу</option>
+                                <option value="Сведение трека">Заказать сведение трека</option>
+                                <option value="Минус">Заказать бит</option>
+                                <option value="Панели">Заказать панели</option>
+                                <option value="Курс по битмейкингу">Заказать курс по битмейкингу</option>
+                                <option value="Курс по сведению треков">Заказать курс по сведению треков</option>
+                            </select>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Телефон, @telegram или email" class="input" id="serviceContact" name="contact" required />
+                            <span class="text-xs text-red-400 hidden mt-1" id="serviceContactError">Введите номер телефона (+79991234567), Telegram (@username) или email</span>
+                        </div>
+                        <div>
+                            <textarea placeholder="Детали заказа: сроки, референсы, пожелания" class="textarea" id="serviceMessage" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">
+                            Отправить заявку
+                        </button>
+                    </form>
             </div>
         </div>
     </section>
@@ -914,7 +917,7 @@
                         <div class="flex-shrink-0">
                             <div class="text-center">
                                 <div class="text-3xl font-black"></div>
-                                <div class="text-xs text-zinc-500 uppercase">Апрель</div>
+                                <div class="text-xs text-zinc-500 uppercase">Скоро</div>
                             </div>
                         </div>
                         <div class="separator md:hidden"></div>
@@ -1088,14 +1091,17 @@
                 <!-- Contact Form -->
                 <div>
                     <form class="space-y-4" onsubmit="return handleSubmit(event)">
+                        <input type="hidden" name="access_key" value="2d503da5-60d8-4439-bc19-f049bb43bc42">
+                        <input type="hidden" name="subject" value="Новое сообщение с сайта Корявый Бас">
+                        <input type="hidden" name="from_name" value="Корявый Бас — Контактная форма">
                         <div>
-                            <input type="text" placeholder="Ваше имя" class="input" required />
+                            <input type="text" placeholder="Ваше имя" class="input" name="name" required />
                         </div>
                         <div>
-                            <input type="email" placeholder="Email" class="input" required />
+                            <input type="email" placeholder="Email" class="input" name="email" required />
                         </div>
                         <div>
-                            <textarea placeholder="Сообщение" class="textarea" rows="6" required></textarea>
+                            <textarea placeholder="Сообщение" class="textarea" name="message" rows="6" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-full">
                             Отправить сообщение
@@ -1167,6 +1173,26 @@
                 `;
                 tracksList.appendChild(trackEl);
             });
+        }
+
+        function validateContact(value) {
+        const v = value.trim();
+
+        // Телефон: минимум 10 цифр, разрешены +, пробелы, скобки, дефисы
+        const phoneRegex = /^\+?[\d\s\-\(\)]{10,20}$/;
+        const digitsOnly = v.replace(/\D/g, '');
+
+        // Telegram: @ + 5-32 символов (буквы, цифры, подчёркивание)
+        const telegramRegex = /^@[a-zA-Z0-9_]{5,32}$/;
+
+        // Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        if (telegramRegex.test(v)) return true;
+        if (emailRegex.test(v)) return true;
+        if (phoneRegex.test(v) && digitsOnly.length >= 10) return true;
+
+        return false;
         }
 
         // Toggle play — реально проигрывает файл из track.file, если он лежит в папке audio/
@@ -1279,8 +1305,37 @@
         // Form submission (общая форма контактов)
         function handleSubmit(e) {
             e.preventDefault();
-            alert('Спасибо за сообщение! Мы свяжемся с вами в ближайшее время.');
-            e.target.reset();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+
+            const formData = new FormData(form);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Спасибо за сообщение! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                } else {
+                    alert('Произошла ошибка при отправке. Попробуйте ещё раз.');
+                }
+            })
+            .catch(() => {
+                alert('Произошла ошибка сети. Проверьте подключение и попробуйте снова.');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
+
             return false;
         }
 
@@ -1300,11 +1355,52 @@
         // Форма заявки на услугу
         function handleServiceSubmit(e) {
             e.preventDefault();
-            const service = document.getElementById('serviceSelect').value;
-            const name = document.getElementById('serviceName').value;
-            alert(`Спасибо, ${name}! Ваша заявка на услугу «${service}» принята. Мы свяжемся с вами в ближайшее время.`);
-            e.target.reset();
-            document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
+            const form = e.target;
+            const contactInput = document.getElementById('serviceContact');
+            const contactError = document.getElementById('serviceContactError');
+
+            // Валидация контакта
+            if (!validateContact(contactInput.value)) {
+                contactError.classList.remove('hidden');
+                contactInput.style.borderColor = 'hsl(0 62.8% 30.6%)';
+                contactInput.focus();
+                return false;
+            } else {
+                contactError.classList.add('hidden');
+                contactInput.style.borderColor = '';
+            }
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+
+            const formData = new FormData(form);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Спасибо! Ваша заявка на услугу «${document.getElementById('serviceSelect').value}» принята. Мы свяжемся с вами в ближайшее время.`);
+                    form.reset();
+                    document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
+                } else {
+                    alert('Произошла ошибка при отправке. Попробуйте ещё раз.');
+                }
+            })
+            .catch(() => {
+                alert('Произошла ошибка сети. Проверьте подключение и попробуйте снова.');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
+
             return false;
         }
 
@@ -1320,6 +1416,12 @@
 
             window.addEventListener('scroll', updateActiveNav);
             updateActiveNav();
+
+            // Убираем ошибку валидации контакта при вводе
+            document.getElementById('serviceContact').addEventListener('input', function() {
+                document.getElementById('serviceContactError').classList.add('hidden');
+                this.style.borderColor = '';
+            });
         });
     </script>
 </body>
