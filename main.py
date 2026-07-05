@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 from handlers import register_routes
 
 
-TOKEN = "8187462573:AAECNAI8GTd_q0KDCPTuCz9BP_kRr6h25jo"
+TOKEN = ""
 
 
 async def main():
